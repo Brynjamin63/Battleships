@@ -146,12 +146,12 @@ Module Module1
         For m = Ship2Y To (Ship2Y + 4)
             Sea(m, Ship2Y) = "S"
         Next
-        twosquare(7, "h")
+        Ship(7, "h")
 
     End Sub
 
     Sub Ship(Length As Integer, Orientation As Char)
-        Dim x, y As Integer
+
 
 
 
