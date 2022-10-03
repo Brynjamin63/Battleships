@@ -1,0 +1,21 @@
+Ship1X = CInt(Rnd() * 5 + 1)
+        Ship1Y = CInt(Rnd() * 8 + 1)
+
+        For z = Ship1X To (Ship1X + 2)
+            Sea(Ship1X, z) = "S"
+        Next
+
+        Do
+            Ship2X = CInt(Rnd() * 8 + 1)
+            Ship2Y = CInt(Rnd() * 4 + 1)
+
+            For m = Ship2Y To (Ship2Y + 4)
+                If Sea(Ship2X, m) = "S" Then
+                    Overlap = True
+                End If
+            Next
+        Loop Until Overlap = False
+
+        For m = Ship2Y To (Ship2Y + 4)
+            Sea(m, Ship2Y) = "S"
+        Next

@@ -109,12 +109,9 @@ Module Module1
     End Sub
 
     Sub SetupGame()
-        Dim z, m As Integer
-        Dim Ship1Y, Ship1X, Ship2Y, Ship2X As Integer
         Torpedoes = 25
         Gamewon = False
         ValidGuess = False
-        Overlap = False
         'Fill sea with dots
         For x = 1 To 9
             For y = 1 To 9
@@ -122,38 +119,21 @@ Module Module1
             Next
         Next
         'Hide ship at random position
-        Randomize() ' Initialize the random number generator
 
-
-        Ship1X = CInt(Rnd() * 5 + 1)
-        Ship1Y = CInt(Rnd() * 8 + 1)
-
-        For z = Ship1X To (Ship1X + 2)
-            Sea(Ship1X, z) = "S"
-        Next
-
-        Do
-            Ship2X = CInt(Rnd() * 8 + 1)
-            Ship2Y = CInt(Rnd() * 4 + 1)
-
-            For m = Ship2Y To (Ship2Y + 4)
-                If Sea(Ship2X, m) = "S" Then
-                    Overlap = True
-                End If
-            Next
-        Loop Until Overlap = False
-
-        For m = Ship2Y To (Ship2Y + 4)
-            Sea(m, Ship2Y) = "S"
-        Next
         Ship(7, "h")
 
     End Sub
 
     Sub Ship(Length As Integer, Orientation As Char)
 
+        Randomize() ' Initialize the random number generator
 
+        Dim x, y As Integer
 
+        x = CInt(Rnd() * 8 + 1)
+        y = CInt(Rnd() * 8 + 1)
+
+        Sea(x, y) = "S"
 
 
     End Sub
