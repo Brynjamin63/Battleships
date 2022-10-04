@@ -83,11 +83,6 @@ Module Module1
                     Console.Write("S")
                     Console.ForegroundColor = ConsoleColor.Gray
                 End If
-                If Sea(x, y) = "S" Then
-                    Console.ForegroundColor = ConsoleColor.Blue
-                    Console.Write("S")
-                    Console.ForegroundColor = ConsoleColor.Gray
-                End If
                 If Sea(x, y) = "M" Then
                     Console.ForegroundColor = ConsoleColor.Green
                     Console.Write("m")
@@ -109,6 +104,7 @@ Module Module1
     End Sub
 
     Sub SetupGame()
+
         Torpedoes = 25
         Gamewon = False
         ValidGuess = False
@@ -120,7 +116,8 @@ Module Module1
         Next
         'Hide ship at random position
 
-        Ship(7, "h")
+        Ship(2, "h")
+        Ship(4, "v")
 
     End Sub
 
@@ -128,12 +125,45 @@ Module Module1
 
         Randomize() ' Initialize the random number generator
 
-        Dim x, y As Integer
+        Dim ValidPlace1, ValidPlace2 As Boolean
+        Dim ShipX, ShipY As Integer
 
-        x = CInt(Rnd() * 8 + 1)
-        y = CInt(Rnd() * 8 + 1)
+        ValidPlace1 = False
+        ValidPlace2 = False
 
-        Sea(x, y) = "S"
+
+        Do
+
+            ShipX = CInt(Rnd() * 5 + 1)
+            ShipY = CInt(Rnd() * 5 + 1)
+
+            If Orientation = "h" Then
+                For x = ShipY To (ShipY + (Length - 1))
+                    If Sea(ShipX, x) = "." Then
+                        ValidPlace1 = True
+                    End If
+                Next
+            ElseIf Orientation = "v" Then
+                For x = ShipX To (ShipX + (Length - 1))
+                    If Sea(x, ShipY) = "." Then
+                        ValidPlace2 = True
+                    End If
+                Next
+            End If
+        Loop Until ValidPlace1 = True And ValidPlace2 = True
+
+        If Orientation = "h" Then
+            For x = ShipY To (ShipY + (Length - 1))
+                Sea(ShipX, x) = "S"
+            Next
+        ElseIf Orientation = "v" Then
+            For x = ShipX To (ShipX + (Length - 1))
+                Sea(x, ShipY) = "S"
+            Next
+        End If
+
+
+
 
 
     End Sub
